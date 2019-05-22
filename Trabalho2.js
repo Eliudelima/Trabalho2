@@ -1,9 +1,11 @@
+
 function sendReq() {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+ //essa função interna(filha) é o callback ela que chama o codigo que vc quer pegar   
+    xhttp.onreadystatechange = function(e) {
       if (this.readyState == 4 && this.status == 200) {
-        alert("OI");
-      }
+       montarPagina(this.responseText);
+       }
     };
   
   xhttp.open("GET", "https://fatecrl.edu.br/", true);
@@ -20,8 +22,20 @@ function criarEvento(){
     })
 }
 
-window.onload = criarEvento;
+window.onload = sendReq;
+//window.onload roda assim que a pagina carrega.
 //alvo description-noticia, responseText é a pagina toda
+//function montarPagina(pagina){
+//    document.write(pagina);
+//}
+
 function montarPagina(pagina){
-    document.write(pagina);
+    var parser = new DOMParser();
+    var documento = parser.parseFromString(pagina, "text/html");
+    documento.querySelectorAll(".description-noticia").forEach(function(div){
+        var p = div.children[1].innerHTML;
+        var div2 = document.createElement("div");
+        div2.innerHTML = p;
+        document.body.appendChild(div2);
+    });
 }
