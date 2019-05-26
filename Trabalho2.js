@@ -1,14 +1,33 @@
+//observei na pagina https://turismosaovicente.com.br/ tem uma classe chamada """line lft""" que esta em uma div e depois vem outra div e depois vem os """as"""
+//mais parecido com a pagina da fatec
+//porem não funcionou, acredito que tem mais alguma coisa que temos que mudar
 
+function montarPagina(pagina){
+    var parser = new DOMParser();
+    var documento = parser.parseFromString(pagina, "text/html");
+    documento.querySelectorAll(".banner_roteiros lft").forEach(function(div){
+        var ul = div.children;
+        Array.from(ul).forEach(function(li){
+            var noticia = li.children;
+            Array.from(noticia).forEach(x => document.body.appendChild(x));
+        })
+        //var div2 = document.createElement("div");
+        //div2.innerHTML = p;
+        //document.body.appendChild(div2);
+    });
+}
+
+//description-noticia
 function sendReq() {
     var xhttp = new XMLHttpRequest();
- //essa função interna(filha) é o callback ela que chama o codigo que vc quer pegar   
-    xhttp.onreadystatechange = function(e) {
+    xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-       montarPagina(this.responseText);
-       }
+        montarPagina(this.responseText);
+        alert("Oi!");
+      }
     };
   
-  xhttp.open("GET", "https://fatecrl.edu.br/", true);
+  xhttp.open("GET", "https://burles.co/", true);
   xhttp.send();
 }
 
@@ -22,20 +41,6 @@ function criarEvento(){
     })
 }
 
-window.onload = sendReq;
-//window.onload roda assim que a pagina carrega.
-//alvo description-noticia, responseText é a pagina toda
-//function montarPagina(pagina){
-//    document.write(pagina);
-//}
+window.onload = criarEvento;
 
-function montarPagina(pagina){
-    var parser = new DOMParser();
-    var documento = parser.parseFromString(pagina, "text/html");
-    documento.querySelectorAll(".description-noticia").forEach(function(div){
-        var p = div.children[1].innerHTML;
-        var div2 = document.createElement("div");
-        div2.innerHTML = p;
-        document.body.appendChild(div2);
-    });
-}
+// https://burles.co/ - Funciona
