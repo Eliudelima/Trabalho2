@@ -45,6 +45,9 @@ window.onload = criarEvento;
 // https://gente.ig.com.br/ - Funciona
 // https://www.msn.com/pt-br/entretenimento/famosos - Funciona até sem servidor, precisamos de mais um
 
+
+// ------> https://natelinha.uol.com.br/ testa esse!
+
 //http://rduirapuru.com.br/noticias/
 //https://www.sonoticias.com.br/
 //https://www.nsctotal.com.br/dc
